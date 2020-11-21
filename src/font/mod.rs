@@ -23,8 +23,8 @@ pub struct FontCache<'a> {
 }
 
 impl<'a> FontCache<'a> {
-    pub fn glyph(&self, glyph: char) -> &'a Texture {
-        self.glyph_map.get(&glyph).unwrap()
+    pub fn glyph(&mut self, glyph: char) -> &mut Texture<'a> {
+        self.glyph_map.get_mut(&glyph).unwrap()
     }
 }
 
@@ -71,6 +71,7 @@ impl FontManager {
             
             glyph_map.insert(char_code, texture);
         }
+
         Ok(FontCache {
             glyph_map
         }) 
