@@ -17,6 +17,8 @@ use crate::font::{
 
 pub struct View {
     context: Sdl,
+    width: u32,
+    height: u32,
     pub canvas: Canvas<Window>,
 }
 
@@ -34,6 +36,8 @@ impl View {
 
         Ok(View {
             context,
+            width,
+            height,
             canvas,
         })
     }
