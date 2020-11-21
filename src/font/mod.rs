@@ -54,7 +54,7 @@ impl FontManager {
         for c in 0x0020 ..= 0x007F {
             let char_code = from_u32(c).unwrap();
             let surface = font.render(&char_code.to_string())
-                .blended(Color::RGBA(255, 0, 0, 255)).map_err(|e| e.to_string())?;
+                .blended(Color::RGBA(255, 255, 255, 255)).map_err(|e| e.to_string())?;
             let texture = self.texture_creator.create_texture_from_surface(&surface)
                 .map_err(|e| e.to_string())?;
             
@@ -65,7 +65,7 @@ impl FontManager {
         for c in 0x2580 ..= 0x259F {
             let char_code = from_u32(c).unwrap();
             let surface = font.render(&char_code.to_string())
-                .blended(Color::RGBA(255, 0, 0, 255)).map_err(|e| e.to_string())?;
+                .blended(Color::RGBA(255, 255, 255, 255)).map_err(|e| e.to_string())?;
             let texture = self.texture_creator.create_texture_from_surface(&surface)
                 .map_err(|e| e.to_string())?;
             

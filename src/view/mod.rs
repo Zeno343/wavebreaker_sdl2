@@ -1,7 +1,5 @@
 use sdl2::{
     EventPump,
-    pixels::Color,
-    rect::Rect,
     render::{
         Canvas,
     },
@@ -9,6 +7,13 @@ use sdl2::{
     video::{
         Window,
     },
+};
+
+pub use sdl2::{
+    event::Event,
+    keyboard::Keycode,
+    pixels::Color,
+    rect::Rect,
 };
 
 use crate::font::{
@@ -19,7 +24,7 @@ pub struct View {
     context: Sdl,
     width: u32,
     height: u32,
-    pub canvas: Canvas<Window>,
+    canvas: Canvas<Window>,
 }
 
 impl View {
@@ -46,8 +51,8 @@ impl View {
         self.context.event_pump()
     }
 
-    pub fn clear(&mut self, color: Color) {
-        self.canvas.set_draw_color(color);
+    pub fn clear(&mut self) {
+        self.canvas.set_draw_color(Color::RGB(0, 0, 0));
         self.canvas.clear();
     }
 
@@ -64,4 +69,15 @@ impl View {
         self.canvas.present();
     }
 
+    pub fn width(&self) -> u32 {
+        self.width
+    }
+
+    pub fn height(&self) -> u32 {
+        self.height
+    }
+
+    pub fn canvas(&self) -> &Canvas<Window> {
+        &self.canvas
+    }
 }
