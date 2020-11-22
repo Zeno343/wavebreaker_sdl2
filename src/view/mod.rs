@@ -72,7 +72,7 @@ impl View {
         text: &str, 
         color: Color, 
         background: Color,
-        (mut x, mut y): (i32, i32), 
+        (mut x, y): (i32, i32), 
         height: u32
     ) -> Result<(), String> { 
         for glyph in text.chars() {
