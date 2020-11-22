@@ -9,6 +9,7 @@ use sdl2::{
         Canvas,
         Texture,
         TextureCreator,
+        TextureQuery,
     },
     ttf,
     ttf::Sdl2TtfContext,
@@ -25,6 +26,14 @@ pub struct FontCache<'a> {
 impl<'a> FontCache<'a> {
     pub fn glyph(&mut self, glyph: char) -> &mut Texture<'a> {
         self.glyph_map.get_mut(&glyph).unwrap()
+    }
+
+    pub fn size(&self, glyph: char) -> (u32, u32) {
+        let texture = self.glyph_map.get(&glyph).unwrap();
+
+        let TextureQuery { width, height, .. } = texture.query();
+
+        (width, height)
     }
 }
 
