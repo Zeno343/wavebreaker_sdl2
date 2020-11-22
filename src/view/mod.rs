@@ -56,11 +56,35 @@ impl View {
         self.canvas.clear();
     }
 
-    pub fn draw_glyph(&mut self, font: &mut FontCache, glyph: char, color: Color, target: Rect) -> Result<(), String> {
+    pub fn draw_glyph(&mut self, font: &mut FontCache, glyph: char, color: Color, background: Color, target: Rect) -> Result<(), String> {
         let texture = font.glyph(glyph);
         texture.set_color_mod(color.r, color.g, color.b);
 
+        self.canvas.set_draw_color(background);
+        self.canvas.fill_rect(target)?;
         self.canvas.copy(&texture, None, Some(target))?;
+
+        Ok(())
+    }
+
+    pub fn draw_text(&mut self, 
+        font: &mut FontCache, 
+        text: &str, 
+        color: Color, 
+        background: Color,
+        (mut x, mut y): (i32, i32), 
+        height: u32
+    ) -> Result<(), String> { 
+        for glyph in text.chars() {
+            let (glyph_width, glyph_height) = font.size(glyph);
+            let scale = glyph_height / height;
+            let scaled_width = glyph_width / scale;
+
+            let target = Rect::new(x, y, scaled_width, height);
+            self.draw_glyph(font, glyph, color, background, target)?;
+
+            x += scaled_width as i32;
+        }
 
         Ok(())
     }
