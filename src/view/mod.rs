@@ -1,5 +1,4 @@
 use sdl2::{
-    EventPump,
     render::{
         Canvas,
     },
@@ -11,6 +10,7 @@ use sdl2::{
 
 pub use sdl2::{
     event::Event,
+    EventPump,
     keyboard::Keycode,
     pixels::Color,
     rect::Rect,
