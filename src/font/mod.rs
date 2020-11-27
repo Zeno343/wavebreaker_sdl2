@@ -19,12 +19,12 @@ use sdl2::{
     },
 };
 
-pub struct FontCache<'a> {
-    glyph_map: HashMap<char, Texture<'a>>,
+pub struct FontCache {
+    glyph_map: HashMap<char, Texture>,
 }
 
-impl<'a> FontCache<'a> {
-    pub fn glyph(&mut self, glyph: char) -> &mut Texture<'a> {
+impl FontCache {
+    pub fn glyph(&mut self, glyph: char) -> &mut Texture {
         self.glyph_map.get_mut(&glyph).unwrap()
     }
 
